@@ -28,7 +28,6 @@ public interface ClienteMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(source = "telefone", target = "telefone")
     Cliente dtoToEntity(ClienteRequestDTO dto);
-    
 
     @Mapping(source = "nome", target = "nome")
     @Mapping(source = "email", target = "email")
@@ -52,11 +51,6 @@ public interface ClienteMapper {
     @Mapping(source = "telefone", target = "telefone")
     Cliente jpaToDomain(JpaClienteEntity jpa);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "nome", target = "nome")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "telefone", target = "telefone")
-    JpaClienteEntity domainToJpa(Cliente domain);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "nome", target = "nome")

@@ -17,12 +17,12 @@ import com.gerenciamento.food_gerent.utils.mappers.ClienteMapper;
 public class ClienteRepositoryImpl implements ClienteRepository {
 
   private final JpaClienteRepository jpaClienteRepository;
-  
-  @Autowired
-  private ClienteMapper mapper;
+  private final ClienteMapper mapper;
 
-  public ClienteRepositoryImpl(JpaClienteRepository jpaClienteRepository) {
+  // @Autowired
+  public ClienteRepositoryImpl(JpaClienteRepository jpaClienteRepository, ClienteMapper mapper) {
     this.jpaClienteRepository = jpaClienteRepository;
+    this.mapper = mapper;
   }
 
   @Override

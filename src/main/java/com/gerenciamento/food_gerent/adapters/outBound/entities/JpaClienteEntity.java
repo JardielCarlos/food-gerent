@@ -1,36 +1,27 @@
 package com.gerenciamento.food_gerent.adapters.outBound.entities;
 
-import java.util.UUID;
-
 import com.gerenciamento.food_gerent.domain.clientes.Cliente;
+import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "clientes")
-public class JpaClienteEntity {
+@DiscriminatorValue("CLIENTE")
+@Data
+@NoArgsConstructor
+// @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class JpaClienteEntity extends JpaUsuarioEntity{
 
-  @Id
-  @GeneratedValue
-  private UUID id;
-  
-  private String nome;
-  private String email;
-  private String telefone;
+  // Campos especificos de cliente podem ser adicionados aqui
+  // Ex. private String endereco;
 
-  public JpaClienteEntity(Cliente cliente) {
-    this.id = cliente.getId();
-    this.nome = cliente.getNome();
-    this.email = cliente.getEmail();
-    this.telefone = cliente.getTelefone();
+  public JpaClienteEntity(Usuario usuario) {
+    super(usuario);
   }
 }

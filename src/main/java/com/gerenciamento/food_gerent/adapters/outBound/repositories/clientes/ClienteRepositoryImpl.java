@@ -1,4 +1,4 @@
-package com.gerenciamento.food_gerent.adapters.outBound.repositories;
+package com.gerenciamento.food_gerent.adapters.outBound.repositories.clientes;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +17,12 @@ import com.gerenciamento.food_gerent.utils.mappers.ClienteMapper;
 public class ClienteRepositoryImpl implements ClienteRepository {
 
   private final JpaClienteRepository jpaClienteRepository;
-  
-  @Autowired
-  private ClienteMapper mapper;
+  private final ClienteMapper mapper;
 
-  public ClienteRepositoryImpl(JpaClienteRepository jpaClienteRepository) {
+  // @Autowired
+  public ClienteRepositoryImpl(JpaClienteRepository jpaClienteRepository, ClienteMapper mapper) {
     this.jpaClienteRepository = jpaClienteRepository;
+    this.mapper = mapper;
   }
 
   @Override

@@ -1,11 +1,10 @@
 package com.gerenciamento.food_gerent.adapters.outBound.entities;
 
-import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
+import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,6 +21,17 @@ public class JpaClienteEntity extends JpaUsuarioEntity{
   // Ex. private String endereco;
 
   public JpaClienteEntity(Usuario usuario) {
-    super(usuario);
+    super(
+      usuario.getId(), 
+      usuario.getNome(), 
+      usuario.getEmail(), 
+      usuario.getSenha(), 
+      usuario.getCpf(), 
+      UsuarioEnumCargos.DONO, 
+      usuario.getStatus(), 
+      usuario.getDataCriacao(),
+      usuario.getDataAtualizacao(),
+      usuario.getTelefone()
+    ); 
   }
 }

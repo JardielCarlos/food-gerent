@@ -1,4 +1,4 @@
-package com.gerenciamento.food_gerent.adapters.outBound.repositories;
+package com.gerenciamento.food_gerent.adapters.outBound.repositories.clientes;
 
 import java.util.UUID;
 

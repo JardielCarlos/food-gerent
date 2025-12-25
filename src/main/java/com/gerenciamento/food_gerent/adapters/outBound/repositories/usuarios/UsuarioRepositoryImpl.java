@@ -1,0 +1,38 @@
+package com.gerenciamento.food_gerent.adapters.outBound.repositories.usuarios;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.stereotype.Repository;
+
+import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaUsuarioEntity;
+import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
+import com.gerenciamento.food_gerent.domain.usuarios.UsuarioRepository;
+import com.gerenciamento.food_gerent.utils.mappers.UsuarioMapper;
+
+@Repository
+public class UsuarioRepositoryImpl implements UsuarioRepository {
+
+  private final JpaUsuarioRepository jpaUsuarioRepository;
+  private final UsuarioMapper mapper;
+
+  public UsuarioRepositoryImpl(JpaUsuarioRepository jpaUsuarioRepository, UsuarioMapper mapper) {
+    this.jpaUsuarioRepository = jpaUsuarioRepository;
+    this.mapper = mapper;
+  }
+
+  @Override
+  public List<Usuario> findAll() {
+    List<JpaUsuarioEntity> usuarioEntities = this.jpaUsuarioRepository.findAll();
+  
+    return mapper.jpaToDomainList(usuarioEntities);
+  }
+
+  @Override
+  public Optional<Usuario> findById(UUID id) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+  }
+  
+}

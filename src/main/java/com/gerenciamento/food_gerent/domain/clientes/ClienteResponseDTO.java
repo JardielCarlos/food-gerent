@@ -1,6 +1,5 @@
 package com.gerenciamento.food_gerent.domain.clientes;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;

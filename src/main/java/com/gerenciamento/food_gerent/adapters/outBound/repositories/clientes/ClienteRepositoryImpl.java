@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaClienteEntity;
 import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRepository;
+import com.gerenciamento.food_gerent.domain.empresas.Empresa;
 import com.gerenciamento.food_gerent.utils.mappers.ClienteMapper;
+import com.gerenciamento.food_gerent.utils.mappers.EmpresaMapper;
 
 
 @Repository
@@ -47,5 +49,10 @@ public class ClienteRepositoryImpl implements ClienteRepository {
   @Override
   public void deleteById(UUID id) {
     this.jpaClienteRepository.deleteById(id);
+  }
+
+  @Override
+  public Optional<Empresa> findEmpresaById(UUID idCliente) {
+    throw new UnsupportedOperationException("Unimplemented method 'findEmpresaById'");
   }
 }

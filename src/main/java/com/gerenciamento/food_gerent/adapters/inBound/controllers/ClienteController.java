@@ -18,6 +18,8 @@ import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.clientes.ClientePatchDTO;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRequestDTO;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteResponseDTO;
+import com.gerenciamento.food_gerent.domain.empresas.EmpresaPatchDTO;
+import com.gerenciamento.food_gerent.domain.empresas.EmpresaResponseDTO;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,9 +57,25 @@ public class ClienteController {
     return ResponseEntity.ok(updated);
   }
 
+  @PatchMapping("/{idCliente}/empresa/{idEmpresa}")
+  public ResponseEntity<EmpresaResponseDTO> patchEmpresaFromCliente(
+    @PathVariable UUID idCliente,
+    @PathVariable UUID idEmpresa,
+    @Valid @RequestBody EmpresaPatchDTO dto
+  ) {
+    var updatedEmpresa = clienteService.updateEmpresaFromCliente(idCliente, idEmpresa, dto);
+    return ResponseEntity.ok(updatedEmpresa);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteCliente(@PathVariable UUID id){
     this.clienteService.deleteCliente(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @DeleteMapping("/{idCliente}/empresa/{idEmpresa}")
+  public ResponseEntity<Void> deleteEmpresaFromCliente(@PathVariable UUID idCliente, @PathVariable UUID idEmpresa){
+    this.clienteService.deleteEmpresaFromCliente(idCliente, idEmpresa);
     return ResponseEntity.noContent().build();
   }
 

@@ -1,10 +1,15 @@
 package com.gerenciamento.food_gerent.adapters.outBound.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,7 +23,9 @@ import lombok.NoArgsConstructor;
 public class JpaClienteEntity extends JpaUsuarioEntity{
 
   // Campos especificos de cliente podem ser adicionados aqui
-  // Ex. private String endereco;
+
+  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<JpaEmpresaEntity> empresas = new ArrayList<>();
 
   public JpaClienteEntity(Usuario usuario) {
     super(
@@ -33,5 +40,10 @@ public class JpaClienteEntity extends JpaUsuarioEntity{
       usuario.getDataAtualizacao(),
       usuario.getTelefone()
     ); 
+  }
+
+  public void addEmpresa(JpaEmpresaEntity empresa) {
+    empresas.add(empresa);
+    empresa.setCliente(this);
   }
 }

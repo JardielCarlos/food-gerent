@@ -12,8 +12,13 @@ import com.gerenciamento.food_gerent.domain.clientes.ClientePatchDTO;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRepository;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRequestDTO;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteResponseDTO;
+import com.gerenciamento.food_gerent.domain.empresas.Empresa;
+import com.gerenciamento.food_gerent.domain.empresas.EmpresaPatchDTO;
+import com.gerenciamento.food_gerent.domain.empresas.EmpresaRepository;
+import com.gerenciamento.food_gerent.domain.empresas.EmpresaResponseDTO;
 import com.gerenciamento.food_gerent.infrastructure.config.exceptions.EntityNotFoundException;
 import com.gerenciamento.food_gerent.utils.mappers.ClienteMapper;
+import com.gerenciamento.food_gerent.utils.mappers.EmpresaMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 public class ClienteServiceImpl implements ClienteUseCases {
 
   private final ClienteRepository repository;
+  private final EmpresaRepository empresaRepository;
+  private final EmpresaMapper empresaMapper;
 
   @Autowired
   private ClienteMapper mapper;
@@ -64,5 +71,23 @@ public class ClienteServiceImpl implements ClienteUseCases {
     
     Cliente updatedCliente = repository.save(cliente);
     return mapper.toResponseDTO(updatedCliente);
+  
   }
+  @Override
+  public EmpresaResponseDTO updateEmpresaFromCliente(UUID idCliente, UUID idEmpresa, EmpresaPatchDTO data) {
+    Cliente cliente = empresaRepository.updateEmpresaFromCliente(idCliente, idEmpresa, data);
+
+    Empresa empresaAtualizada = cliente.getEmpresas().stream()
+      .filter(e -> e.getId().equals(idEmpresa))
+      .findFirst()
+      .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada com ID: " + idEmpresa + " para o cliente com ID: " + idCliente));
+    
+    return empresaMapper.toResponseDTO(empresaAtualizada);
+  }
+
+  @Override
+  public void deleteEmpresaFromCliente(UUID idCliente, UUID idEmpresa) {
+    empresaRepository.deleteById(idCliente, idEmpresa);
+  }
+
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -12,6 +13,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import com.gerenciamento.food_gerent.infrastructure.config.exceptions.ProblemDetails;
 
 import jakarta.servlet.http.HttpServletRequest;
+import tools.jackson.databind.exc.InvalidFormatException;
 
 public final class ExceptionUtil {
 
@@ -30,6 +32,7 @@ public final class ExceptionUtil {
             case "DataIntegrityViolationException" -> handleDataIntegrityViolation(request);
             case "MethodArgumentNotValidException" -> handleMethodArgumentNotValid((MethodArgumentNotValidException) ex, request);
             case "ConversionFailedException" -> handleConversionFailed((ConversionFailedException) ex, request);
+            case "HttpMessageNotReadableException" -> handleHttpMessageNotReadable((HttpMessageNotReadableException) ex, request);
             default -> new ProblemDetails(
                     "Erro não especificado",
                     HttpStatus.BAD_REQUEST.value(),
@@ -108,5 +111,36 @@ public final class ExceptionUtil {
         String detail = String.format("O valor '%s' fornecido é inválido. Esperava-se um valor do tipo '%s'.", invalidValue, requiredType);
 
         return new ProblemDetails(title, HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), detail, request.getRequestURI());
+    }
+
+
+    private static ProblemDetails handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpServletRequest request) {
+        String title = "Erro de leitura do JSON"; 
+        String detail;
+
+        if (ex.getCause() != null && ex.getCause() instanceof InvalidFormatException ife) {
+            String invalidValue = String.valueOf(ife.getValue()); 
+            Class<?> targetType = ife.getTargetType(); 
+            if (targetType.isEnum()) { 
+                Object[] accepted = targetType.getEnumConstants(); 
+                detail = String.format( 
+                    "O valor '%s' não é válido para o campo. Valores aceitos: %s", invalidValue, 
+                    java.util.Arrays.toString(accepted) 
+                ); 
+            } else { 
+                detail = String.format(
+                    "Valor inválido: '%s'. Esperava-se %s", invalidValue, targetType.getSimpleName()); 
+            } 
+        } else { 
+            detail = "O corpo da requisição contém dados inválidos ou mal formatados."; 
+        }
+        
+        return new ProblemDetails( 
+            title, 
+            HttpStatus.BAD_REQUEST.value(), 
+            HttpStatus.BAD_REQUEST.getReasonPhrase(), 
+            detail, 
+            request.getRequestURI() 
+        );
     }
 }

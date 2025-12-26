@@ -49,7 +49,7 @@ public class ClienteController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<ClienteResponseDTO> patchCliente(@PathVariable UUID id, @RequestBody ClientePatchDTO dto
+  public ResponseEntity<ClienteResponseDTO> patchCliente(@PathVariable UUID id, @Valid@RequestBody ClientePatchDTO dto
   ) {
     ClienteResponseDTO updated = clienteService.updateCliente(id, dto);
     return ResponseEntity.ok(updated);

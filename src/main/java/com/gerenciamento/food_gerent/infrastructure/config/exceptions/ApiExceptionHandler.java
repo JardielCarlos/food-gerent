@@ -4,6 +4,7 @@ import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,6 +24,7 @@ public class ApiExceptionHandler {
         DataIntegrityViolationException.class,
         MethodArgumentNotValidException.class,
         ConversionFailedException.class,
+        HttpMessageNotReadableException.class
     })
     public ResponseEntity<ProblemDetails> handleException(Exception ex, HttpServletRequest request) {
         ProblemDetails problemDetails = ExceptionUtil.getProblemDetails(request, ex);

@@ -13,8 +13,8 @@ public record ClienteResponseDTO(
   String cpf, 
   UsuarioEnumCargos cargo, 
   UsuarioEnumStatus status, 
-  LocalDate dataCriacao, 
-  LocalDate dataAtualizacao, 
+  String dataCriacao, 
+  String dataAtualizacao, 
   String telefone
 ) {
   

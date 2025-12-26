@@ -1,5 +1,7 @@
 package com.gerenciamento.food_gerent.utils.mappers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.mapstruct.BeanMapping;
@@ -47,8 +49,8 @@ public interface ClienteMapper {
     @Mapping(source = "cpf", target = "cpf")
     @Mapping(source = "cargo", target = "cargo")
     @Mapping(source = "status", target = "status")
-    @Mapping(source = "dataCriacao", target = "dataCriacao")
-    @Mapping(source = "dataAtualizacao", target = "dataAtualizacao")
+    @Mapping(source = "dataCriacao", target = "dataCriacao", qualifiedByName = "formatLocalDate")
+    @Mapping(source = "dataAtualizacao", target = "dataAtualizacao", qualifiedByName = "formatLocalDate")
     List<ClienteResponseDTO> toResponseDTOList(List<Cliente> clientes);
 
     @Mapping(source = "nome", target = "nome")
@@ -77,4 +79,8 @@ public interface ClienteMapper {
     @Mapping(target = "dataAtualizacao", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateClienteFromPatchDto(ClientePatchDTO dto, @MappingTarget Cliente cliente);
+
+    static String formatLocalDate(LocalDate date){
+        return date != null ? date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : null;
+    }
 }

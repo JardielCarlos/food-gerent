@@ -84,6 +84,7 @@ public class ClienteServiceImpl implements ClienteUseCases {
     
     return empresaMapper.toResponseDTO(empresaAtualizada);
   }
+  
 
   @Override
   public void deleteEmpresaFromCliente(UUID idCliente, UUID idEmpresa) {

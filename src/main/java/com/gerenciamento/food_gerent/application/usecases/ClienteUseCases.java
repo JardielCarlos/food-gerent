@@ -13,6 +13,7 @@ import com.gerenciamento.food_gerent.domain.empresas.EmpresaResponseDTO;
 public interface ClienteUseCases {
   public List<ClienteResponseDTO> getAllClientes();
   public ClienteResponseDTO getClienteById(UUID id);
+  public EmpresaResponseDTO getClienteByEmpresaCnpj(String cnpj, UUID idCliente);
   public Cliente createCliente(ClienteRequestDTO data);
   public ClienteResponseDTO updateCliente(UUID id, ClientePatchDTO data);
   public EmpresaResponseDTO updateEmpresaFromCliente(UUID idCliente, UUID idEmpresa, EmpresaPatchDTO data);

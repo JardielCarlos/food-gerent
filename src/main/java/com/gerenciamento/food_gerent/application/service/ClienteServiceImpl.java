@@ -81,14 +81,23 @@ public class ClienteServiceImpl implements ClienteUseCases {
       .filter(e -> e.getId().equals(idEmpresa))
       .findFirst()
       .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada com ID: " + idEmpresa + " para o cliente com ID: " + idCliente));
+
+    empresaAtualizada.setIdCliente(idCliente);
     
     return empresaMapper.toResponseDTO(empresaAtualizada);
   }
-  
 
   @Override
   public void deleteEmpresaFromCliente(UUID idCliente, UUID idEmpresa) {
     empresaRepository.deleteById(idCliente, idEmpresa);
+  }
+
+  @Override
+  public EmpresaResponseDTO getClienteByEmpresaCnpj(String cnpj, UUID idCliente) {
+    Empresa empresa = empresaRepository.findByCnpj(cnpj, idCliente)
+      .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada com CNPJ: " + cnpj + " para o cliente com ID: " + idCliente));
+
+    return empresaMapper.toResponseDTO(empresa);
   }
 
 }

@@ -27,7 +27,7 @@ public interface EmpresaMapper {
   @Mapping(source = "email", target = "email")
   @Mapping(source = "rua", target = "rua")
   @Mapping(source = "bairro", target = "bairro")
-  @Mapping(source = "cidade", target = "cidade")
+  @Mapping(source = "cidade", target = "cidade") 
   @Mapping(source = "estado", target = "estado")
   @Mapping(source = "cep", target = "cep")
   @Mapping(source = "telefone", target = "telefone")

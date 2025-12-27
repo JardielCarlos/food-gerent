@@ -11,7 +11,6 @@ import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRepository;
 import com.gerenciamento.food_gerent.domain.empresas.Empresa;
 import com.gerenciamento.food_gerent.utils.mappers.ClienteMapper;
-import com.gerenciamento.food_gerent.utils.mappers.EmpresaMapper;
 
 
 @Repository
@@ -36,6 +35,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
   @Override
   public Optional<Cliente> findById(UUID id) {
     Optional<JpaClienteEntity> clienteEntity = this.jpaClienteRepository.findById(id);
+    // System.out.println(clienteEntity);
     return clienteEntity.map(mapper::jpaToDomain);
   }
 

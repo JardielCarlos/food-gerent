@@ -67,7 +67,7 @@ public final class ExceptionUtil {
     private static ProblemDetails handleDataIntegrityViolation(HttpServletRequest request) {
         String title = "Violação de integridade de campo";
         String detail = "Violação de integridade detectada no banco de dados.";
-
+        
         return new ProblemDetails(title, HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), detail, request.getRequestURI());
     }
 

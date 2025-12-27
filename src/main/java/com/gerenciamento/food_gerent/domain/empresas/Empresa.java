@@ -3,7 +3,7 @@ package com.gerenciamento.food_gerent.domain.empresas;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumStatus;
+import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 public class Empresa {
   
@@ -18,14 +18,14 @@ public class Empresa {
   private String cep;
   private String telefone;
   private String email;
-  private UsuarioEnumStatus status;
+  private EnumStatus status;
   private LocalDate dataCriacao;
   private LocalDate dataAtualizacao;
 
   public Empresa() {}
 
   public Empresa(UUID id, UUID idCliente, String nome, String cnpj, String rua, String bairro, String cidade,
-      String estado, String cep, String telefone, String email, UsuarioEnumStatus status, LocalDate dataCriacao,
+      String estado, String cep, String telefone, String email, EnumStatus status, LocalDate dataCriacao,
       LocalDate dataAtualizacao) {
     this.id = id;
     this.idCliente = idCliente;
@@ -131,11 +131,11 @@ public class Empresa {
     this.email = email;
   }
 
-  public UsuarioEnumStatus getStatus() {
+  public EnumStatus getStatus() {
     return status;
   }
 
-  public void setStatus(UsuarioEnumStatus status) {
+  public void setStatus(EnumStatus status) {
     this.status = status;
   }
 

@@ -1,6 +1,6 @@
 package com.gerenciamento.food_gerent.domain.empresas;
 
-import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumStatus;
+import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -44,7 +44,7 @@ public record EmpresaPatchDTO(
     )
     String telefone,
     
-    UsuarioEnumStatus status
+    EnumStatus status
 ) {
   
 }

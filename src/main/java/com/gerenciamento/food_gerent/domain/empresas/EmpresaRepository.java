@@ -11,7 +11,7 @@ public interface EmpresaRepository {
 
   Optional<Empresa> findById(UUID id);
 
-  Optional<Empresa> findByCnpj(String cnpj);
+  Optional<Empresa> findByCnpj(String cnpj, UUID idCliente);
 
   Empresa save(Empresa empresa);
 

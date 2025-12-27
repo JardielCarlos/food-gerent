@@ -8,8 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
-import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumStatus;
+import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
@@ -38,16 +39,23 @@ public class JpaUsuarioEntity {
   @GeneratedValue
   private UUID id;
 
+  @Column(nullable = false)
   private String nome;
+
+  @Column(unique = true, nullable = false)
   private String email;
+
+  @Column(nullable = false)
   private String senha;
+
+  @Column(unique = true, nullable = false)
   private String cpf;
 
   @Enumerated(EnumType.STRING)
   private UsuarioEnumCargos cargo;
   
   @Enumerated(EnumType.STRING)
-  private UsuarioEnumStatus status;
+  private EnumStatus status;
 
   @CreationTimestamp
   private LocalDate dataCriacao;
@@ -60,7 +68,7 @@ public class JpaUsuarioEntity {
   @PrePersist
   public void prePersist() { 
     if (this.status == null) { 
-      this.status = UsuarioEnumStatus.ATIVO; 
+      this.status = EnumStatus.ATIVO; 
     }
   }
 
@@ -72,7 +80,7 @@ public class JpaUsuarioEntity {
     this.senha = usuario.getSenha();
     this.cpf = usuario.getCpf();
     this.cargo = usuario.getCargo();
-    this.status = UsuarioEnumStatus.ATIVO;
+    this.status = EnumStatus.ATIVO;
     this.dataCriacao = usuario.getDataCriacao();
     this.dataAtualizacao = usuario.getDataAtualizacao();
   }

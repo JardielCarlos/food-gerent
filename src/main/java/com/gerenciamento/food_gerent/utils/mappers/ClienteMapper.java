@@ -40,6 +40,7 @@ public interface ClienteMapper {
     @Mapping(source = "status", target = "status")
     @Mapping(source = "dataCriacao", target = "dataCriacao")
     @Mapping(source = "dataAtualizacao", target = "dataAtualizacao")
+    @Mapping(source = "empresas", target = "empresas")
     ClienteResponseDTO toResponseDTO(Cliente entity);
 
     @Mapping(source = "id", target = "id")

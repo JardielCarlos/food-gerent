@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gerenciamento.food_gerent.application.service.ClienteServiceImpl;
@@ -44,6 +45,15 @@ public class ClienteController {
     return ResponseEntity.ok(cliente);
   }
 
+  @GetMapping("/{idCliente}/empresa")
+  public ResponseEntity<EmpresaResponseDTO> getClienteByEmpresaCnpj(
+    @PathVariable UUID idCliente,
+    @RequestParam  String cnpj
+  ){
+    EmpresaResponseDTO empresa = this.clienteService.getClienteByEmpresaCnpj(cnpj, idCliente);
+    return ResponseEntity.ok(empresa);
+  }
+
   @PostMapping
   public ResponseEntity<Cliente> createCliente(@Valid @RequestBody ClienteRequestDTO clienteRequetDTO){
     Cliente newCliente = this.clienteService.createCliente(clienteRequetDTO);
@@ -63,7 +73,7 @@ public class ClienteController {
     @PathVariable UUID idEmpresa,
     @Valid @RequestBody EmpresaPatchDTO dto
   ) {
-    var updatedEmpresa = clienteService.updateEmpresaFromCliente(idCliente, idEmpresa, dto);
+    EmpresaResponseDTO updatedEmpresa = clienteService.updateEmpresaFromCliente(idCliente, idEmpresa, dto);
     return ResponseEntity.ok(updatedEmpresa);
   }
 

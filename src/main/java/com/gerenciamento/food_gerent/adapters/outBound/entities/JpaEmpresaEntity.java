@@ -1,15 +1,15 @@
 package com.gerenciamento.food_gerent.adapters.outBound.entities;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.gerenciamento.food_gerent.domain.empresas.Empresa;
-import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumStatus;
+import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,7 +35,7 @@ public class JpaEmpresaEntity {
   private UUID id;
 
   @Enumerated(EnumType.STRING)
-  private UsuarioEnumStatus status;
+  private EnumStatus status;
   
   @CreationTimestamp
   private LocalDate dataCriacao;
@@ -47,20 +47,37 @@ public class JpaEmpresaEntity {
   @JoinColumn(name = "cliente_id", nullable = false)
   private JpaClienteEntity cliente;
 
+  @Column(nullable = false)
   private String nome;
+
+  @Column(unique = true, nullable = false)
   private String cnpj;
+
+  @Column(nullable = false)
   private String rua;
+
+  @Column(nullable = false)
   private String bairro;
+  
+  @Column(nullable = false)
   private String cidade;
+  
+  @Column(nullable = false)
   private String estado;
+
+  @Column(nullable = false)
   private String cep;
+
+  @Column(nullable = false)
   private String telefone;
+
+  @Column(unique = true, nullable = false)
   private String email;
 
   @PrePersist
   public void prePersist() { 
     if (this.status == null) { 
-      this.status = UsuarioEnumStatus.ATIVO; 
+      this.status = EnumStatus.ATIVO; 
     }
   }
 

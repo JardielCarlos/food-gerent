@@ -1,7 +1,7 @@
 package com.gerenciamento.food_gerent.domain.clientes;
 
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
-import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumStatus;
+import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -23,7 +23,7 @@ public record ClientePatchDTO(
     String telefone,
     String senha, 
     UsuarioEnumCargos cargo, 
-    UsuarioEnumStatus status
+    EnumStatus status
 ) {
   
 }

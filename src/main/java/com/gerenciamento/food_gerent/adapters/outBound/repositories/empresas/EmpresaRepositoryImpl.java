@@ -42,8 +42,8 @@ public class EmpresaRepositoryImpl implements EmpresaRepository {
   }
 
   @Override
-  public Optional<Empresa> findByCnpj(String cnpj) {
-    Optional<JpaEmpresaEntity> empresaEntity = this.jpaEmpresaRepository.findByCnpj(cnpj);
+  public Optional<Empresa> findByCnpj(String cnpj, UUID idCliente) {
+    Optional<JpaEmpresaEntity> empresaEntity = this.jpaEmpresaRepository.findByCnpjAndCliente_Id(cnpj, idCliente);
     return empresaEntity.map(mapper::jpaToDomain);
   }
 

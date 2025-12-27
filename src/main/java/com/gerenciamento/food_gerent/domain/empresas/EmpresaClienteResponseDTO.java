@@ -4,19 +4,11 @@ import java.util.UUID;
 
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
-
-public record EmpresaResponseDTO(
+public record EmpresaClienteResponseDTO(
   UUID id,
-  UUID idCliente,
   String nome,
   String cnpj,
   String email,
-  String rua,
-  String bairro,
-  String cidade,
-  String estado,
-  String cep,
-  String telefone,
   EnumStatus status,
   String dataCriacao,
   String dataAtualizacao

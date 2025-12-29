@@ -1,8 +1,12 @@
 package com.gerenciamento.food_gerent.domain.usuarios;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 public class Usuario {
@@ -17,11 +21,12 @@ public class Usuario {
   private LocalDate dataCriacao;
   private LocalDate dataAtualizacao;
   private String telefone;
+  private Set<Permissao> permissoes;
 
   public Usuario() {
   }
 
-  public Usuario(UUID id, String nome, String email, String senha, String cpf, UsuarioEnumCargos cargo, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao, String telefone) {
+  public Usuario(UUID id, String nome, String email, String senha, String cpf, UsuarioEnumCargos cargo, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao, String telefone, Set<Permissao> permissoes) {
     this.id = id;
     this.nome = nome;
     this.email = email;
@@ -32,6 +37,7 @@ public class Usuario {
     this.dataCriacao = dataCriacao;
     this.dataAtualizacao = dataAtualizacao;
     this.telefone = telefone;
+    this.permissoes = permissoes;
   }
 
   public UUID getId() {
@@ -112,5 +118,17 @@ public class Usuario {
 
   public void setTelefone(String telefone) {
     this.telefone = telefone;
+  }
+
+  public Set<Permissao> getPermissoes() {
+    return permissoes;
+  }
+
+  public void setPermissoes(Set<Permissao> permissoes) {
+    this.permissoes = permissoes;
+  }
+
+  public boolean isLoginCorrect(String senha, PasswordEncoder passwordEncoder) {
+    return passwordEncoder.matches(senha, this.senha);
   }
 }

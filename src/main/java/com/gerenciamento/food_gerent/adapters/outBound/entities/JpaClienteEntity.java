@@ -27,20 +27,21 @@ public class JpaClienteEntity extends JpaUsuarioEntity{
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<JpaEmpresaEntity> empresas = new ArrayList<>();
 
-  public JpaClienteEntity(Usuario usuario) {
-    super(
-      usuario.getId(), 
-      usuario.getNome(), 
-      usuario.getEmail(), 
-      usuario.getSenha(), 
-      usuario.getCpf(), 
-      UsuarioEnumCargos.DONO, 
-      usuario.getStatus(), 
-      usuario.getDataCriacao(),
-      usuario.getDataAtualizacao(),
-      usuario.getTelefone()
-    ); 
-  }
+  // public JpaClienteEntity(Usuario usuario) {
+  //   super(
+  //     usuario.getId(), 
+  //     usuario.getNome(), 
+  //     usuario.getEmail(), 
+  //     usuario.getSenha(), 
+  //     usuario.getCpf(), 
+  //     UsuarioEnumCargos.DONO, 
+  //     usuario.getStatus(), 
+  //     usuario.getDataCriacao(),
+  //     usuario.getDataAtualizacao(),
+  //     usuario.getTelefone(),
+  //     usuario.getPermissoes()
+  //   ); 
+  // }
 
   public void addEmpresa(JpaEmpresaEntity empresa) {
     empresas.add(empresa);

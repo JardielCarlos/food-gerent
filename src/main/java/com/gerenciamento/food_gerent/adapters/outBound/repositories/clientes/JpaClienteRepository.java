@@ -11,4 +11,6 @@ import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaClienteEntity
 public interface JpaClienteRepository extends JpaRepository<JpaClienteEntity, UUID> {
   
   Optional<JpaClienteEntity> findEmpresaById(UUID idCliente);
+
+  Optional<JpaClienteEntity> findByNome(String nome);
 }

@@ -18,6 +18,8 @@ public interface UsuarioMapper {
   @Mapping(source = "telefone", target = "telefone")
   List<Usuario> jpaToDomainList(List<JpaUsuarioEntity> usuarios);
 
+  Usuario jpaToDomain(JpaUsuarioEntity usuario);
+
   @Mapping(source = "id", target = "id")
   @Mapping(source = "nome", target = "nome")
   @Mapping(source = "email", target = "email")

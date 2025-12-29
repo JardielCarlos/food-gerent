@@ -8,4 +8,7 @@ public interface UsuarioRepository {
   List<Usuario> findAll();
   
   Optional<Usuario> findById(UUID id);
+
+  Optional<Usuario> findByEmail(String email);  
+
 }

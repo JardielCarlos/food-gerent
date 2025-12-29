@@ -84,4 +84,17 @@ public interface ClienteMapper {
     static String formatLocalDate(LocalDate date){
         return date != null ? date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : null;
     }
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "nome", target = "nome")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "telefone", target = "telefone")
+    @Mapping(source = "senha", target = "senha")
+    @Mapping(source = "cpf", target = "cpf")
+    @Mapping(source = "cargo", target = "cargo")
+    @Mapping(target = "status", defaultValue = "ATIVO")
+    @Mapping(source = "permissoes", target = "permissoes")
+    @Mapping(source = "dataCriacao", target = "dataCriacao")
+    @Mapping(source = "dataAtualizacao", target = "dataAtualizacao")
+    @Mapping(target = "empresas", ignore = true)
+    JpaClienteEntity toDomain(Cliente cliente);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.gerenciamento.food_gerent.application.usecases.ClienteUseCases;
@@ -88,7 +89,9 @@ public class ClienteServiceImpl implements ClienteUseCases {
   }
 
   @Override
-  public void deleteEmpresaFromCliente(UUID idCliente, UUID idEmpresa) {
+  public void deleteEmpresaFromCliente(UUID idEmpresa, JwtAuthenticationToken token) {
+    UUID idCliente = UUID.fromString(token.getName());
+
     empresaRepository.deleteById(idCliente, idEmpresa);
   }
 

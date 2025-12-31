@@ -3,6 +3,7 @@ package com.gerenciamento.food_gerent.adapters.inBound.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +37,8 @@ public class EmpresaController {
   }
 
   @PostMapping
-  public ResponseEntity<EmpresaResponseDTO> createEmpresa(@Valid @RequestBody EmpresaRequestDTO data){
-    EmpresaResponseDTO createdEmpresa = this.service.createEmpresa(data);
+  public ResponseEntity<EmpresaResponseDTO> createEmpresa(@Valid @RequestBody EmpresaRequestDTO data, JwtAuthenticationToken token){
+    EmpresaResponseDTO createdEmpresa = this.service.createEmpresa(data, token);
     return ResponseEntity.ok(createdEmpresa);
   }
 }

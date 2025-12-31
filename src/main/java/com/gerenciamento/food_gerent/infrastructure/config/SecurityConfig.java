@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,6 +26,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
   
   @Value("${jwt.public.key}")
@@ -40,7 +42,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> auth
             // Primeiro os endpoints públicos
             .requestMatchers(HttpMethod.POST, "/login").permitAll()
-            // .requestMatchers("/public/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/clientes").permitAll()
             // Depois a regra global
             .anyRequest().authenticated()
         )
@@ -66,20 +68,3 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 }
-
-// @Bean
-// public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//     http
-//         .csrf(csrf -> csrf.disable())
-//         .authorizeHttpRequests(auth -> auth
-//             // Primeiro os endpoints públicos
-//             .requestMatchers(HttpMethod.POST, "/login").permitAll()
-//             .requestMatchers("/public/**").permitAll()
-//             // Depois a regra global
-//             .anyRequest().authenticated()
-//         )
-//         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-//         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-//     return http.build();
-// }

@@ -10,9 +10,6 @@ import jakarta.validation.constraints.Size;
 
 public record EmpresaRequestDTO(
 
-  @NotNull(message = "O ID do cliente é obrigatório")
-  UUID idCliente,
-
   @NotBlank(message = "O nome da empresa é obrigatório")
   @Size(min = 3, message = "O nome da empresa deve ter no mínimo 3 caracteres")
   String nome,

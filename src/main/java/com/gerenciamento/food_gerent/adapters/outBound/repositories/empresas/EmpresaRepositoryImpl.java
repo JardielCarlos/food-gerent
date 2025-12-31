@@ -78,12 +78,24 @@ public class EmpresaRepositoryImpl implements EmpresaRepository {
     JpaClienteEntity clienteEntity = this.jpaClienteRepository.findById(idCliente) 
       .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com id: " + idCliente));
 
+    Boolean isAdmin = clienteEntity.getPermissoes()
+      .stream()
+      .anyMatch(permissao -> permissao.getNome().equalsIgnoreCase("Admin"));
+      
+    if (isAdmin) {
+      this.jpaEmpresaRepository.deleteById(idEmpresa);
+      return;
+    }
+
     JpaEmpresaEntity empresaEntity = clienteEntity.getEmpresas().stream()
       .filter(e -> e.getId().equals(idEmpresa))
       .findFirst()
       .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada com id: " + idEmpresa + " para o cliente com id: " + idCliente));
 
+    
     clienteEntity.getEmpresas().remove(empresaEntity);
+
+    
     this.jpaClienteRepository.save(clienteEntity);
   }
 }

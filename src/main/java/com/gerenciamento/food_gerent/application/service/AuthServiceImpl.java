@@ -2,10 +2,10 @@ package com.gerenciamento.food_gerent.application.service;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtClaimAccessor;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.gerenciamento.food_gerent.application.usecases.LoginUseCase;
 import com.gerenciamento.food_gerent.domain.auth.LoginRequestDTO;
 import com.gerenciamento.food_gerent.domain.auth.LoginResponseDTO;
+import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
 import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioRepository;
 
@@ -39,12 +40,17 @@ public class AuthServiceImpl implements LoginUseCase {
     Instant now = Instant.now();
     Long expiresIn = 300L;
 
+    String scopes = usuario.get().getPermissoes()
+      .stream()
+      .map(Permissao::getNome)
+      .collect(Collectors.joining(" "));
+
     JwtClaimsSet claims = JwtClaimsSet.builder()
       .issuer("myBackend")
       .subject(usuario.get().getId().toString())
       .issuedAt(now)
       .expiresAt(now.plusSeconds(expiresIn))
-      // .claim("scope", "Admin")
+      .claim("scope", scopes)
       .build();
 
     var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

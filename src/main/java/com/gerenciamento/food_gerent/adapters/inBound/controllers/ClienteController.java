@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -83,9 +84,9 @@ public class ClienteController {
     return ResponseEntity.noContent().build();
   }
 
-  @DeleteMapping("/{idCliente}/empresa/{idEmpresa}")
-  public ResponseEntity<Void> deleteEmpresaFromCliente(@PathVariable UUID idCliente, @PathVariable UUID idEmpresa){
-    this.clienteService.deleteEmpresaFromCliente(idCliente, idEmpresa);
+  @DeleteMapping("/empresa/{idEmpresa}")
+  public ResponseEntity<Void> deleteEmpresaFromCliente(@PathVariable UUID idEmpresa, JwtAuthenticationToken token){
+    this.clienteService.deleteEmpresaFromCliente(idEmpresa, token);
     return ResponseEntity.noContent().build();
   }
 

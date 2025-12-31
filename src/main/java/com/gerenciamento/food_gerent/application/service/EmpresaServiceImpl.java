@@ -3,6 +3,7 @@ package com.gerenciamento.food_gerent.application.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.gerenciamento.food_gerent.application.usecases.EmpresaUseCases;
@@ -37,8 +38,9 @@ public class EmpresaServiceImpl implements EmpresaUseCases {
   }
 
   @Override
-  public EmpresaResponseDTO createEmpresa(EmpresaRequestDTO data) {
+  public EmpresaResponseDTO createEmpresa(EmpresaRequestDTO data, JwtAuthenticationToken token) {
     Empresa empresa = mapper.toEntity(data);
+    empresa.setIdCliente(UUID.fromString(token.getName()));
     Empresa savedEmpresa = repository.save(empresa);
     return mapper.toResponseDTO(savedEmpresa);
   }

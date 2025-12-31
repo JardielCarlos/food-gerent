@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
 import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
@@ -87,17 +88,7 @@ public class JpaUsuarioEntity {
     }
   }
 
-  // public JpaUsuarioEntity(Usuario usuario) {
-  //   this.id = usuario.getId();
-  //   this.nome = usuario.getNome();
-  //   this.email = usuario.getEmail();
-  //   this.telefone = usuario.getTelefone();
-  //   this.senha = usuario.getSenha();
-  //   this.cpf = usuario.getCpf();
-  //   this.cargo = usuario.getCargo();
-  //   this.status = EnumStatus.ATIVO;
-  //   this.permissoes = usuario.getPermissoes()
-  //   this.dataCriacao = usuario.getDataCriacao();
-  //   this.dataAtualizacao = usuario.getDataAtualizacao();
-  // }
+  public boolean isLoginCorrect(String senha, PasswordEncoder passwordEncoder) {
+    return passwordEncoder.matches(senha, this.senha);
+  }
 }

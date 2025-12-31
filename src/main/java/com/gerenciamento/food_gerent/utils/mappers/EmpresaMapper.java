@@ -60,7 +60,7 @@ public interface EmpresaMapper {
   @Mapping(target = "status", ignore = true)
   @Mapping(target = "dataCriacao", ignore = true)
   @Mapping(target = "dataAtualizacao", ignore = true)
-  @Mapping(target = "idCliente", source = "idCliente")
+  @Mapping(target = "idCliente", ignore = true)
   @Mapping(target = "nome", source = "nome")
   @Mapping(target = "cnpj", source = "cnpj")
   @Mapping(target = "email", source = "email")

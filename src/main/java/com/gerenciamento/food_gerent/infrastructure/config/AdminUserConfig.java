@@ -1,7 +1,6 @@
 package com.gerenciamento.food_gerent.infrastructure.config;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
@@ -10,9 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaClienteEntity;
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaPermissaoEntity;
-import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRepository;
-import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
 import com.gerenciamento.food_gerent.domain.permissoes.PermissaoRepository;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;

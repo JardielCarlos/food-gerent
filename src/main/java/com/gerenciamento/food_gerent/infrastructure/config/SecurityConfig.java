@@ -44,7 +44,8 @@ public class SecurityConfig {
     http
       .csrf(csrf -> csrf.disable())
       .authorizeHttpRequests(auth -> auth
-          .requestMatchers(HttpMethod.POST, "/login").permitAll()
+          .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+          .requestMatchers(HttpMethod.POST, "/auth/refresh-token").permitAll()
           .requestMatchers(HttpMethod.POST, "/clientes").permitAll()
           .anyRequest().authenticated()
       )

@@ -78,6 +78,8 @@ public interface ClienteMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dataCriacao", ignore = true)
     @Mapping(target = "dataAtualizacao", ignore = true)
+    @Mapping(target = "permissoes", ignore = true)
+    @Mapping(target = "empresas", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateClienteFromPatchDto(ClientePatchDTO dto, @MappingTarget Cliente cliente);
 

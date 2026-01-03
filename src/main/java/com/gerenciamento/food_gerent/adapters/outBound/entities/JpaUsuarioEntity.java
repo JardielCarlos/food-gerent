@@ -8,8 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
-import com.gerenciamento.food_gerent.domain.usuarios.Usuario;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 

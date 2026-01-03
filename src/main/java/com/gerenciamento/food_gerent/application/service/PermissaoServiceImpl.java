@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaPermissaoEntity;
 import com.gerenciamento.food_gerent.application.usecases.PermissaoUseCases;
 import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
 import com.gerenciamento.food_gerent.domain.permissoes.PermissaoRepository;

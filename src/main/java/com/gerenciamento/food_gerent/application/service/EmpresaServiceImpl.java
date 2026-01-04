@@ -44,10 +44,4 @@ public class EmpresaServiceImpl implements EmpresaUseCases {
     Empresa savedEmpresa = repository.save(empresa);
     return mapper.toResponseDTO(savedEmpresa);
   }
-
-  @Override
-  public EmpresaResponseDTO updateEmpresa(UUID id, EmpresaPatchDTO data) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateEmpresa'");
-  }
 }

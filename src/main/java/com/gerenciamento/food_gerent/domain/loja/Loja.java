@@ -1,39 +1,33 @@
-package com.gerenciamento.food_gerent.domain.empresas;
+package com.gerenciamento.food_gerent.domain.loja;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-import com.gerenciamento.food_gerent.domain.loja.Loja;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
-public class Empresa {
+public class Loja {
   
-  private UUID id;
-  private UUID idCliente;
+  private UUID id;  
+  private UUID idEmpresa;
   private String nome;
-  private String cnpj;
+  private String  cnpj;
   private String rua;
   private String bairro;
   private String cidade;
   private String estado;
   private String cep;
   private String telefone;
-  private String email;
   private EnumStatus status;
   private LocalDate dataCriacao;
   private LocalDate dataAtualizacao;
+  
+  public Loja() {
+  }
 
-  private List<Loja> lojas = new ArrayList<>();
-
-  public Empresa() {}
-
-  public Empresa(UUID id, UUID idCliente, String nome, String cnpj, String rua, String bairro, String cidade,
-      String estado, String cep, String telefone, String email, EnumStatus status, LocalDate dataCriacao,
-      LocalDate dataAtualizacao, List<Loja> lojas) {
+  public Loja(UUID id, UUID idEmpresa, String nome, String cnpj, String rua, String bairro, String cidade,
+      String estado, String cep, String telefone, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao) {
     this.id = id;
-    this.idCliente = idCliente;
+    this.idEmpresa = idEmpresa;
     this.nome = nome;
     this.cnpj = cnpj;
     this.rua = rua;
@@ -42,9 +36,7 @@ public class Empresa {
     this.estado = estado;
     this.cep = cep;
     this.telefone = telefone;
-    this.email = email;
     this.status = status;
-    this.lojas = lojas;
     this.dataCriacao = dataCriacao;
     this.dataAtualizacao = dataAtualizacao;
   }
@@ -57,12 +49,12 @@ public class Empresa {
     this.id = id;
   }
 
-  public UUID getIdCliente() {
-    return idCliente;
+  public UUID getIdEmpresa() {
+    return idEmpresa;
   }
 
-  public void setIdCliente(UUID idCliente) {
-    this.idCliente = idCliente;
+  public void setIdEmpresa(UUID idEmpresa) {
+    this.idEmpresa = idEmpresa;
   }
 
   public String getNome() {
@@ -129,14 +121,6 @@ public class Empresa {
     this.telefone = telefone;
   }
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public EnumStatus getStatus() {
     return status;
   }
@@ -161,16 +145,5 @@ public class Empresa {
     this.dataAtualizacao = dataAtualizacao;
   }
 
-  public List<Loja> getLojas() {
-    return lojas;
-  }
-
-  public void setLojas(List<Loja> lojas) {
-    this.lojas = lojas;
-  }
-
-  public void adicionarLoja(Loja loja) { 
-    this.lojas.add(loja); 
-  }
   
 }

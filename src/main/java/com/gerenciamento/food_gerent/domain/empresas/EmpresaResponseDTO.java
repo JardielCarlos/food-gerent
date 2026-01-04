@@ -1,7 +1,9 @@
 package com.gerenciamento.food_gerent.domain.empresas;
 
+import java.util.List;
 import java.util.UUID;
 
+import com.gerenciamento.food_gerent.domain.loja.LojaDetailsResponseDTO;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 
@@ -19,7 +21,8 @@ public record EmpresaResponseDTO(
   String telefone,
   EnumStatus status,
   String dataCriacao,
-  String dataAtualizacao
+  String dataAtualizacao,
+  List<LojaDetailsResponseDTO> lojas
 ) {
   
 }

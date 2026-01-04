@@ -16,8 +16,10 @@ import com.gerenciamento.food_gerent.domain.empresas.Empresa;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaPatchDTO;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaRequestDTO;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaResponseDTO;
+import com.gerenciamento.food_gerent.domain.loja.Loja;
+import com.gerenciamento.food_gerent.domain.loja.LojaDetailsResponseDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = LojaMapper.class)
 public interface EmpresaMapper {
 
   @Mapping(source = "id", target = "id")
@@ -72,18 +74,37 @@ public interface EmpresaMapper {
   @Mapping(target = "telefone", source = "telefone")
   Empresa toEntity(EmpresaRequestDTO dto);
 
-  // @Mapping(target = "id", ignore = true) 
-  // @Mapping(target = "idCliente", ignore = true) 
-  // @Mapping(target = "dataCriacao", ignore = true) 
-  // @Mapping(target = "dataAtualizacao", ignore = true) 
-  // @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE) 
-  // void updateEmpresaFromPatchDto(EmpresaPatchDTO dto, @MappingTarget Empresa empresa); 
   @Mapping(target = "id", ignore = true) 
   @Mapping(target = "cliente", ignore = true) 
   @Mapping(target = "dataCriacao", ignore = true) 
   @Mapping(target = "dataAtualizacao", ignore = true) 
   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
   void updateEmpresaEntityFromPatchDto(EmpresaPatchDTO dto, @MappingTarget JpaEmpresaEntity empresaEntity);
+
+  @Mapping(source = "id", target = "id")
+  @Mapping(source = "idCliente", target = "cliente.id")
+  @Mapping(source = "nome", target = "nome")
+  @Mapping(source = "cnpj", target = "cnpj")
+  @Mapping(source = "email", target = "email")
+  @Mapping(source = "rua", target = "rua")
+  @Mapping(source = "bairro", target = "bairro")
+  @Mapping(source = "cidade", target = "cidade") 
+  @Mapping(source = "estado", target = "estado")
+  @Mapping(source = "cep", target = "cep")
+  @Mapping(source = "telefone", target = "telefone")
+  @Mapping(source = "status", target = "status")
+  @Mapping(source = "dataCriacao", target = "dataCriacao")
+  @Mapping(source = "dataAtualizacao", target = "dataAtualizacao")
+  // @Mapping(source = "lojas", target = "lojas")
+  JpaEmpresaEntity toJpa(Empresa empresa);
+
+  @Mapping(source = "id", target = "id") 
+  @Mapping(source = "nome", target = "nome") 
+  @Mapping(source = "cnpj", target = "cnpj") 
+  @Mapping(source = "telefone", target = "telefone") 
+  @Mapping(source = "status", target = "status") 
+  @Mapping(source = "dataCriacao", target = "dataCriacao") 
+  @Mapping(source = "dataAtualizacao", target = "dataAtualizacao") LojaDetailsResponseDTO toLojaDetailsResponseDTO(Loja loja);
 
   @Named("formatLocalDate")
   static String formatLocalDate(LocalDate date){

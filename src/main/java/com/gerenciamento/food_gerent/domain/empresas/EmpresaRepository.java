@@ -15,7 +15,7 @@ public interface EmpresaRepository {
 
   Empresa save(Empresa empresa);
 
-  public Cliente updateEmpresaFromCliente(UUID idCliente, UUID idEmpresa, EmpresaPatchDTO data);
+  Cliente updateEmpresaFromCliente(UUID idCliente, UUID idEmpresa, EmpresaPatchDTO data);
 
   void deleteById(UUID idCliente, UUID idEmpresa);
 }

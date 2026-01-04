@@ -45,7 +45,7 @@ public class AuthServiceImpl implements LoginUseCase {
     }
 
     Instant now = Instant.now();
-    Long expiresIn = 300L;
+    Long expiresIn = 1800L;
 
     String scopes = usuario.get().getPermissoes()
       .stream()
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements LoginUseCase {
     // Só chega aqui se passou nas validações
     Usuario usuario = refreshTokenDB.getUsuario();
     Instant now = Instant.now();
-    Long expiresIn = 300L;
+    Long expiresIn = 1800L;
 
     String scopes = usuario.getPermissoes()
       .stream()

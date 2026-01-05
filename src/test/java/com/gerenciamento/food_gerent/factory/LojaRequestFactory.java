@@ -1,5 +1,6 @@
 package com.gerenciamento.food_gerent.factory;
 
+import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaRequestDTO;
 
 public class LojaRequestFactory {
@@ -14,6 +15,20 @@ public class LojaRequestFactory {
       "58000-000", 
       "(83) 99999-9999", 
       "6fe8dc87-623e-4b8e-b713-a754bc2ee14c"
+    );
+  }
+
+  public static LojaPatchDTO lojaPatchDTO(){
+    return new LojaPatchDTO(
+      "Nova Loja",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     );
   }
 }

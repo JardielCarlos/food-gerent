@@ -1,10 +1,9 @@
-package com.gerenciamento.food_gerent.factory;
+package com.gerenciamento.food_gerent.factory.loja;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaResponseDTO;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 

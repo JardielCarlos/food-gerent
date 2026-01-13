@@ -21,8 +21,8 @@ import com.gerenciamento.food_gerent.application.service.LojaServiceImpl;
 import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaRequestDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaResponseDTO;
-import com.gerenciamento.food_gerent.factory.LojaRequestFactory;
-import com.gerenciamento.food_gerent.factory.LojaResponseFactory;
+import com.gerenciamento.food_gerent.factory.loja.LojaRequestFactory;
+import com.gerenciamento.food_gerent.factory.loja.LojaResponseFactory;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 @ExtendWith(MockitoExtension.class)
@@ -184,7 +184,7 @@ public class LojaControllerTest {
       lojaController.createLoja(request);
 
       // Assert -> Verifica se o resultado está conforme o esperado
-      verify(lojaService).createLoja(captor.capture());
+      verify(lojaService, times(1)).createLoja(captor.capture());
       var capturedValue = captor.getValue();
 
       assertEquals(request.nome(), capturedValue.nome());

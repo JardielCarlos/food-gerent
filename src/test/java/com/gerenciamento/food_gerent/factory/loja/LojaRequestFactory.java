@@ -1,5 +1,6 @@
-package com.gerenciamento.food_gerent.factory;
+package com.gerenciamento.food_gerent.factory.loja;
 
+import com.gerenciamento.food_gerent.domain.loja.Loja;
 import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaRequestDTO;
 
@@ -29,6 +30,12 @@ public class LojaRequestFactory {
       null,
       null,
       null
+    );
+  }
+
+  public static Loja createLojaPatchDTO(){
+    return new Loja(
+      
     );
   }
 }

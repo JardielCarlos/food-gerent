@@ -458,7 +458,82 @@ public class LojaServiceImplTest {
 
       verify(lojaRepositoryImpl, times(1)).save(lojaAtualizada);
     }
-
   }
+  @Nested
+  class deleteLoja {
+    @Test
+    void deveDeletarLojaComSucesso() {
+      // Arrange
+      UUID idLoja = UUID.fromString("d59c7955-6777-4ca4-975f-c90f0cc33eac");
+      UUID idEmpresa = UUID.fromString("6fe8dc87-623e-4b8e-b713-a754bc2ee14c");
 
+      Empresa empresa = EmpresaFactory.build();
+      Loja lojaExistente = LojaFactory.build();
+      empresa.getLojas().add(lojaExistente);
+
+      when(empresaRepositoryImpl.findById(idEmpresa))
+        .thenReturn(Optional.of(empresa));
+
+      // Act
+      lojaServiceImpl.deleteLoja(idLoja, idEmpresa);
+
+      // Assert
+      assertFalse(empresa.getLojas().contains(lojaExistente));
+      verify(empresaRepositoryImpl, times(1)).save(empresa);
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoEmpresaNaoExistir(){
+      UUID idLoja = UUID.fromString("d59c7955-6777-4ca4-975f-c90f0cc33eac");
+      UUID idEmpresa = UUID.fromString("6fe8dc87-623e-4b8e-b713-a754bc2ee14c");
+
+      when(empresaRepositoryImpl.findById(idEmpresa))
+        .thenReturn(Optional.empty());
+
+      // Act + Assert
+      assertThrows(EntityNotFoundException.class,
+        () -> lojaServiceImpl.deleteLoja(idLoja, idEmpresa));
+
+      verify(empresaRepositoryImpl, never()).save(any());
+    }
+
+    @Test
+    void deveLancarExcecaoQuandoLojaNaoExistir(){
+      //Arrange
+      UUID idLoja = UUID.fromString("d59c7955-6777-4ca4-975f-c90f0cc33eac");
+      UUID idEmpresa = UUID.fromString("6fe8dc87-623e-4b8e-b713-a754bc2ee14c");
+
+      Empresa empresa = EmpresaFactory.build();
+      // empresa sem lojas
+
+      when(empresaRepositoryImpl.findById(idEmpresa))
+        .thenReturn(Optional.of(empresa));
+
+      // Act + Assert
+      assertThrows(EntityNotFoundException.class,
+        () -> lojaServiceImpl.deleteLoja(idLoja, idEmpresa));
+
+      verify(empresaRepositoryImpl, never()).save(any());
+    }
+
+    void deveLancarExcecaoQuandoLojaNaoExistirNaEmpresa(){
+      //Arrange
+      UUID idLoja = UUID.fromString("d59c7955-6777-4ca4-975f-c90f0cc33eac");
+      UUID idEmpresa = UUID.fromString("6fe8dc87-623e-4b8e-b713-a754bc2ee14c");
+
+      Empresa empresa = EmpresaFactory.build();
+      Loja lojaExistente = LojaFactory.build();
+
+      empresa.getLojas().add(lojaExistente);
+
+      when(empresaRepositoryImpl.findById(idEmpresa))
+        .thenReturn(Optional.of(empresa));
+
+      // Act + Assert
+      assertThrows(EntityNotFoundException.class,
+        () -> lojaServiceImpl.deleteLoja(UUID.fromString("f1e2d3c4-b5a6-78b9-0c1d-2e3f4a5b6c78"), idEmpresa));
+
+      verify(empresaRepositoryImpl, never()).save(any());
+    }
+  }
 }

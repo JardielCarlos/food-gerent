@@ -22,7 +22,8 @@ public class LojaFactory {
       "(83) 99999-9999",
       EnumStatus.ATIVO,
       LocalDate.parse("2024-01-01"),
-      LocalDate.parse("2024-06-01")
+      LocalDate.parse("2024-06-01"),
+      List.of()
     );
   }
 
@@ -41,7 +42,8 @@ public class LojaFactory {
         "(11) 98888-8888",
         EnumStatus.INATIVO,
         LocalDate.parse("2023-05-15"),
-        LocalDate.parse("2024-05-15")
+        LocalDate.parse("2024-05-15"),
+        List.of()
       ),
       new Loja(
         UUID.fromString("f1e2d3c4-b5a6-78b9-0c1d-2e3f4a5b6c78"),
@@ -56,7 +58,8 @@ public class LojaFactory {
         "(21) 97777-7777",
         EnumStatus.ATIVO,
         LocalDate.parse("2022-11-20"),
-        LocalDate.parse("2024-04-20")
+        LocalDate.parse("2024-04-20"),
+        List.of()
       )
     );
   }

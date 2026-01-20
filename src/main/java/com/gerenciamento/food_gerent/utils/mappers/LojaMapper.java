@@ -1,16 +1,20 @@
 package com.gerenciamento.food_gerent.utils.mappers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaLojaEntity;
 import com.gerenciamento.food_gerent.domain.empresas.Empresa;
 import com.gerenciamento.food_gerent.domain.loja.Loja;
+import com.gerenciamento.food_gerent.domain.loja.LojaDetailsResponseDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaRequestDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaResponseDTO;
@@ -21,6 +25,7 @@ public interface LojaMapper {
   // JPA -> Domínio
   @Mapping(source = "id", target = "id")
   @Mapping(source = "empresa.id", target = "idEmpresa")
+  @Mapping(target = "funcionarios", ignore = true)
   Loja jpaToDomain(JpaLojaEntity entity);
 
   List<Loja> jpaToDomainList(List<JpaLojaEntity> lojaEntities);
@@ -30,6 +35,7 @@ public interface LojaMapper {
   @Mapping(target = "status", ignore = true)
   @Mapping(target = "dataCriacao", ignore = true)
   @Mapping(target = "dataAtualizacao", ignore = true)
+  @Mapping(target = "funcionarios", ignore = true)
   @Mapping(source = "dto.idEmpresa", target = "idEmpresa")
   @Mapping(source = "dto.nome", target = "nome")
   @Mapping(source = "dto.cnpj", target = "cnpj")
@@ -53,6 +59,20 @@ public interface LojaMapper {
   @Mapping(target = "dataCriacao", ignore = true)
   @Mapping(target = "dataAtualizacao", ignore = true)
   @Mapping(target = "idEmpresa", ignore = true)
+  @Mapping(target = "funcionarios", ignore = true)
   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
   Loja updateLojaEntityFromPatchDto(LojaPatchDTO data, @MappingTarget Loja loja);
+
+  @Mapping(source = "id", target = "id") 
+  @Mapping(source = "nome", target = "nome") 
+  @Mapping(source = "cnpj", target = "cnpj") 
+  @Mapping(source = "telefone", target = "telefone") 
+  @Mapping(source = "status", target = "status") 
+  @Mapping(source = "dataCriacao", target = "dataCriacao")
+  @Mapping(source = "dataAtualizacao", target = "dataAtualizacao") LojaDetailsResponseDTO toResponse(Loja loja);
+
+  @Named("formatLocalDate") 
+  static String formatLocalDate(LocalDate date){
+    return date != null ? date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : null; 
+  }
 }

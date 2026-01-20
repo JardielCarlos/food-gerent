@@ -1,6 +1,8 @@
 package com.gerenciamento.food_gerent.adapters.outBound.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,6 +19,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -37,6 +40,9 @@ public class JpaLojaEntity {
   @ManyToOne
   @JoinColumn(name = "empresa_id", nullable = false)
   private JpaEmpresaEntity empresa;
+
+  @OneToMany(mappedBy = "loja")
+  private List<JpaFuncionarioEntity> funcionarios = new ArrayList<>();
 
   @Column(nullable = false)
   private String nome;

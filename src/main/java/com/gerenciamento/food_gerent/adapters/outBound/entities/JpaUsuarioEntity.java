@@ -71,7 +71,7 @@ public class JpaUsuarioEntity {
 
   private String telefone;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
     name = "usuario_permissoes",
     joinColumns = @JoinColumn(name = "id"),

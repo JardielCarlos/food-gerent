@@ -1,6 +1,7 @@
 package com.gerenciamento.food_gerent.domain.usuarios;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public class Usuario {
   private LocalDate dataCriacao;
   private LocalDate dataAtualizacao;
   private String telefone;
-  private Set<Permissao> permissoes;
+  private Set<Permissao> permissoes = new HashSet<>();
 
   public Usuario() {
   }
@@ -37,7 +38,7 @@ public class Usuario {
     this.dataCriacao = dataCriacao;
     this.dataAtualizacao = dataAtualizacao;
     this.telefone = telefone;
-    this.permissoes = permissoes;
+    this.permissoes = permissoes != null ? permissoes : new HashSet<>();
   }
 
   public UUID getId() {
@@ -125,7 +126,7 @@ public class Usuario {
   }
 
   public void setPermissoes(Set<Permissao> permissoes) {
-    this.permissoes = permissoes;
+    this.permissoes = permissoes != null ? permissoes : new HashSet<>();
   }
 
   public boolean isLoginCorrect(String senha, PasswordEncoder passwordEncoder) {

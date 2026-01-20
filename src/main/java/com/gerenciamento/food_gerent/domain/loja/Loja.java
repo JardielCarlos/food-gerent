@@ -1,8 +1,11 @@
 package com.gerenciamento.food_gerent.domain.loja;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.gerenciamento.food_gerent.domain.funcionarios.Funcionario;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
 public class Loja {
@@ -20,14 +23,16 @@ public class Loja {
   private EnumStatus status;
   private LocalDate dataCriacao;
   private LocalDate dataAtualizacao;
+  private List<Funcionario> funcionarios = new ArrayList<>();
   
   public Loja() {
   }
 
   public Loja(UUID id, UUID idEmpresa, String nome, String cnpj, String rua, String bairro, String cidade,
-      String estado, String cep, String telefone, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao) {
+      String estado, String cep, String telefone, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao, List<Funcionario> funcionarios) {
     this.id = id;
     this.idEmpresa = idEmpresa;
+    this.funcionarios = funcionarios;
     this.nome = nome;
     this.cnpj = cnpj;
     this.rua = rua;
@@ -145,5 +150,11 @@ public class Loja {
     this.dataAtualizacao = dataAtualizacao;
   }
 
-  
+  public List<Funcionario> getFuncionarios() {
+    return funcionarios;
+  }
+
+  public void setFuncionarios(List<Funcionario> funcionarios) {
+    this.funcionarios = funcionarios;
+  }
 }

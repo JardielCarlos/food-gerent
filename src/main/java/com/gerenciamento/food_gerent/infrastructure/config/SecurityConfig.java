@@ -84,6 +84,17 @@ public class SecurityConfig {
     return http.build();
   }
 
+  // @Bean
+  // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+  //     http
+  //         .csrf(csrf -> csrf.disable())
+  //         .authorizeHttpRequests(auth -> auth
+  //             .anyRequest().permitAll()   // libera tudo
+  //         )
+  //         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+  //         .oauth2ResourceServer(oauth2 -> oauth2.disable()); // desliga o resource server
+  //     return http.build();
+  // }
 
   @Bean
   public JwtDecoder jwtDecoder(){

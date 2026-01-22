@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import com.gerenciamento.food_gerent.domain.loja.LojaDetailsResponseDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaResponseDTO;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
@@ -81,4 +82,15 @@ public class LojaResponseFactory {
     );
   }
 
+  public static LojaDetailsResponseDTO buildDetailsResponse(){
+    return new LojaDetailsResponseDTO(
+      UUID.fromString("d59c7955-6777-4ca4-975f-c90f0cc33eac"), 
+      "Loja A",
+      "12.345.678/0001-90",
+      "(83) 99999-9999",
+      EnumStatus.ATIVO, 
+      LocalDate.parse("2024-01-01"),
+      LocalDate.parse("2024-06-01")
+    );
+  }
 }

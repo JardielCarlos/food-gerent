@@ -28,7 +28,7 @@ public class Loja {
   public Loja() {
   }
 
-  public Loja(UUID id, UUID idEmpresa, String nome, String cnpj, String rua, String bairro, String cidade,
+  public  Loja(UUID id, UUID idEmpresa, String nome, String cnpj, String rua, String bairro, String cidade,
       String estado, String cep, String telefone, EnumStatus status, LocalDate dataCriacao, LocalDate dataAtualizacao, List<Funcionario> funcionarios) {
     this.id = id;
     this.idEmpresa = idEmpresa;

@@ -23,9 +23,7 @@ public interface FuncionarioMapper {
   @Mapping(target = "loja.empresa", ignore = true)
   JpaFuncionarioEntity domainToJpa(Funcionario funcionario);
 
-  @Mapping(source = "loja", target = "loja") // delega para LojaMapper
-  @Mapping(source = "dataCriacao", target = "dataCriacao", qualifiedByName = "formatLocalDate")
-  @Mapping(source = "dataAtualizacao", target = "dataAtualizacao", qualifiedByName = "formatLocalDate")
+  @Mapping(source = "loja", target = "loja")
   FuncionarioResponseDTO domainToResponse(Funcionario funcionario);
   List<FuncionarioResponseDTO> domainToResponseList(List<Funcionario> funcionarios);
   

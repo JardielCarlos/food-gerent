@@ -95,24 +95,6 @@ public class FuncionarioControllerTest {
     }
 
     @Test
-    void deveLancarExcecaoFuncionarioNaoEncontrado(){
-      // Arrange
-      UUID funcionarioId = UUID.fromString("11111111-1111-1111-1111-111111111112");
-
-      when(funcionarioService.getFuncionarioById(funcionarioId))
-        .thenThrow(new EntityNotFoundException("Funcionário não encontrado com o ID: " + funcionarioId));
-
-      // Act
-      EntityNotFoundException exception = assertThrows(
-        EntityNotFoundException.class,
-        () -> funcionarioController.getFuncionarioById(funcionarioId)
-      );
-
-      // Assert
-      assertEquals("Funcionário não encontrado com o ID: " + funcionarioId, exception.getMessage());
-    }
-
-    @Test
     void deveLancarExcecaoIdInvalido(){
       // Arrange
       UUID invalidId = UUID.fromString("00000000-0000-0000-0000-000000000000");

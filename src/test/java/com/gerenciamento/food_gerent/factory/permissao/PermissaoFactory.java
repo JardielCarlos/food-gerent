@@ -6,7 +6,7 @@ public class PermissaoFactory {
   public static Permissao build(){
     return new Permissao(
       1L,
-      "PERMISSAO_TESTE_ADMIN"
+      "Basic"
     );
   }
 }

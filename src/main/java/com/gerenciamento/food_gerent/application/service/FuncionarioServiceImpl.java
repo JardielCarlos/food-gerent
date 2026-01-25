@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaLojaEntity;
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaPermissaoEntity;
 import com.gerenciamento.food_gerent.application.usecases.FuncionarioUseCases;
 import com.gerenciamento.food_gerent.domain.funcionarios.Funcionario;
@@ -23,7 +22,6 @@ import com.gerenciamento.food_gerent.infrastructure.config.exceptions.EntityNotF
 import com.gerenciamento.food_gerent.utils.mappers.FuncionarioMapper;
 import com.gerenciamento.food_gerent.utils.mappers.PermissaoMapper;
 
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -32,8 +30,8 @@ public class FuncionarioServiceImpl implements FuncionarioUseCases{
 
   private final FuncionarioRepository funcionarioRepository;
   private final LojaRepository lojaRepository;
-  private final BCryptPasswordEncoder passwordEncoder;
   private final PermissaoRepository permissaoRepository;
+  private final BCryptPasswordEncoder passwordEncoder;
   private final FuncionarioMapper mapper; 
   private final PermissaoMapper permissaoMapper;
 
@@ -55,7 +53,7 @@ public class FuncionarioServiceImpl implements FuncionarioUseCases{
     Funcionario funcionario = mapper.requestToDomain(funcionarioDTO);
 
     Loja loja = lojaRepository.findById(funcionarioDTO.lojaId()) 
-      .orElseThrow(() -> new EntityNotFoundException("Loja não encontrada"));
+      .orElseThrow(() -> new EntityNotFoundException("Loja não encontrada com o ID: " + funcionarioDTO.lojaId()));
 
     funcionario.setLoja(loja);
     funcionario.setSenha(passwordEncoder.encode(funcionario.getSenha()));

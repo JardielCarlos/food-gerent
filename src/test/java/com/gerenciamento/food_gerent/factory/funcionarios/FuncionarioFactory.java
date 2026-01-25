@@ -2,8 +2,9 @@ package com.gerenciamento.food_gerent.factory.funcionarios;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.gerenciamento.food_gerent.domain.funcionarios.Funcionario;
@@ -25,7 +26,7 @@ public class FuncionarioFactory {
       LocalDate.parse("2023-05-15"),
       LocalDate.parse("2024-05-15"),
       "83-99999-9999",
-      Set.of(PermissaoFactory.build()),
+      new HashSet<>(),
       BigDecimal.valueOf(1800),
       LojaFactory.build()
     );
@@ -43,7 +44,7 @@ public class FuncionarioFactory {
         LocalDate.parse("2023-05-15"),
         LocalDate.parse("2024-05-15"),
         "83-99999-9999",
-        Set.of(PermissaoFactory.build()),
+        new HashSet<>(),
         BigDecimal.valueOf(1800),
         LojaFactory.build()
       ),
@@ -58,10 +59,32 @@ public class FuncionarioFactory {
         LocalDate.parse("2022-03-10"),
         LocalDate.parse("2024-03-10"),
         "83-88888-8888",
-        Set.of(PermissaoFactory.build()),
+        new HashSet<>(),
         BigDecimal.valueOf(1500),
         LojaFactory.build()
       )
     );
   }
+
+  public static Optional<Funcionario> buildOptional(){
+    return Optional.of(build());
+  }
+
+  public static Funcionario buildUpdated(){
+    return new Funcionario(
+      UUID.fromString("11111111-1111-1111-1111-111111111111"),
+      "Funcionario João Atualizado",
+      "joao@gmail.com",
+      "senha123",
+      "123.456.789-00",
+      UsuarioEnumCargos.EMPREGADO,
+      EnumStatus.ATIVO,
+      LocalDate.parse("2023-05-15"),
+      LocalDate.parse("2024-05-15"),
+      "83-99999-9999",
+      new HashSet<>(List.of(PermissaoFactory.build())),
+      BigDecimal.valueOf(1800),
+      LojaFactory.build()
+    );
+  };
 }

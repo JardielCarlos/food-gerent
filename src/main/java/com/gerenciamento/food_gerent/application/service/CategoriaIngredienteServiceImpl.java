@@ -68,9 +68,7 @@ public class CategoriaIngredienteServiceImpl implements CategoriaIngredienteUseC
     return node.buildDto();
   }
 
-  /**
-   * Monta um mapa id → builder já com os filhos ligados aos pais.
-   */
+
   private Map<UUID, CategoriaResponseDTOBuilder> buildTreeMap(List<CategoriaIngrediente> all) {
     Map<UUID, CategoriaResponseDTOBuilder> builders = new HashMap<>();
     for (CategoriaIngrediente c : all) {

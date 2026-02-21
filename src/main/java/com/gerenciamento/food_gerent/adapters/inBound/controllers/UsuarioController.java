@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.UsuarioServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.UsuarioUseCases;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioResponseDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-  private final UsuarioServiceImpl usuarioService;
+  private final UsuarioUseCases usuarioService;
 
   @GetMapping
   @PreAuthorize("hasAuthority('SCOPE_Admin')")

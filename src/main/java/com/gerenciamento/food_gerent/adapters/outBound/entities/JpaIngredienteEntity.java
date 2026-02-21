@@ -46,6 +46,9 @@ public class JpaIngredienteEntity {
   @GeneratedValue
   private UUID id;
 
+  @Column(nullable = false)
+  private String nome;
+
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private EnumUnidadeMedida unidadeMedida;

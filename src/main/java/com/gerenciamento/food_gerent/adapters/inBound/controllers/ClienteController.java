@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.ClienteServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.ClienteUseCases;
 import com.gerenciamento.food_gerent.domain.clientes.Cliente;
 import com.gerenciamento.food_gerent.domain.clientes.ClientePatchDTO;
 import com.gerenciamento.food_gerent.domain.clientes.ClienteRequestDTO;
@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-  private final ClienteServiceImpl clienteService;
+  private final ClienteUseCases clienteService;
 
   @GetMapping
   public ResponseEntity<List<ClienteResponseDTO>> getClientes(){

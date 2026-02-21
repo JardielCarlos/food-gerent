@@ -5,15 +5,16 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import com.gerenciamento.food_gerent.application.usecases.LoginUseCase;
+import com.gerenciamento.food_gerent.application.usecases.RefreshTokenUseCases;
 import com.gerenciamento.food_gerent.domain.auth.LoginRequestDTO;
 import com.gerenciamento.food_gerent.domain.auth.LoginResponseDTO;
 import com.gerenciamento.food_gerent.domain.permissoes.Permissao;
@@ -30,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthServiceImpl implements LoginUseCase {
 
   private final UsuarioRepository repository;
-  private final RefreshTokenServiceImpl serviceRefreshToken;
+  private final RefreshTokenUseCases serviceRefreshToken;
   private final BCryptPasswordEncoder passwordEncoder;
   private final JwtEncoder jwtEncoder;
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.LojaServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.LojaUseCases;
 import com.gerenciamento.food_gerent.domain.loja.LojaPatchDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaRequestDTO;
 import com.gerenciamento.food_gerent.domain.loja.LojaResponseDTO;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LojaController {
   
-  private final LojaServiceImpl service;
+  private final LojaUseCases service;
 
   @GetMapping
   public ResponseEntity<List<LojaResponseDTO>> getLojas(){

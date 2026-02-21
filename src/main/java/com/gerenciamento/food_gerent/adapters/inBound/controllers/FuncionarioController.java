@@ -35,7 +35,7 @@ public class FuncionarioController {
   }
 
   @GetMapping("/{id}")
-public ResponseEntity<FuncionarioResponseDTO> getFuncionarioById(@PathVariable UUID id){
+  public ResponseEntity<FuncionarioResponseDTO> getFuncionarioById(@PathVariable UUID id){
     FuncionarioResponseDTO funcionario = this.funcionarioService.getFuncionarioById(id);
     return ResponseEntity.ok(funcionario);
   }

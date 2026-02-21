@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaFuncionarioEntity;
 import com.gerenciamento.food_gerent.domain.funcionarios.Funcionario;
 import com.gerenciamento.food_gerent.domain.funcionarios.FuncionarioRepository;
-import com.gerenciamento.food_gerent.infrastructure.config.exceptions.EntityNotFoundException;
 import com.gerenciamento.food_gerent.utils.mappers.FuncionarioMapper;
 
 import lombok.RequiredArgsConstructor;

@@ -20,6 +20,7 @@ public class ApiExceptionHandler {
     // Exception Genéricas 
     @ExceptionHandler({
         MethodArgumentTypeMismatchException.class,
+        IllegalArgumentException.class,
         MissingServletRequestParameterException.class,
         DataIntegrityViolationException.class,
         MethodArgumentNotValidException.class,

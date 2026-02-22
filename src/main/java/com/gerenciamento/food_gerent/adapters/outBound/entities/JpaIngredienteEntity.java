@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumUnidadeMedida;
+import com.gerenciamento.food_gerent.adapters.outBound.entities.JpaTagIngredienteEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -70,7 +71,7 @@ public class JpaIngredienteEntity {
       @Index(name = "idx_ingrediente_tag_tag", columnList = "tag_id")
     }
   )
-  private Set<JpaTagEntity> tags = new HashSet<>();
+  private Set<JpaTagIngredienteEntity> tags = new HashSet<>();
 
   @Enumerated(EnumType.STRING)
   private EnumStatus status;

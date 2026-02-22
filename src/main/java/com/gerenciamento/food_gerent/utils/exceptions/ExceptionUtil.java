@@ -1,6 +1,10 @@
 package com.gerenciamento.food_gerent.utils.exceptions;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
@@ -29,6 +33,7 @@ public final class ExceptionUtil {
             case "MethodArgumentTypeMismatchException" -> handleMethodArgumentTypeMismatch((MethodArgumentTypeMismatchException) ex, request);
             case "MissingServletRequestParameterException" ->
                     handleMissingServletRequestParameter((MissingServletRequestParameterException) ex, request);
+            case "IllegalArgumentException" -> handleIllegalArgumentException((IllegalArgumentException) ex, request);
             case "DataIntegrityViolationException" -> handleDataIntegrityViolation(request);
             case "MethodArgumentNotValidException" -> handleMethodArgumentNotValid((MethodArgumentNotValidException) ex, request);
             case "ConversionFailedException" -> handleConversionFailed((ConversionFailedException) ex, request);
@@ -41,6 +46,37 @@ public final class ExceptionUtil {
                     request.getRequestURI()
             );
         };
+    }
+
+    private static ProblemDetails handleIllegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
+        String title = "Valor inválido informado";
+        String detail = Optional.ofNullable(ex.getMessage()).orElse("Valor inválido fornecido.");
+
+        // Mensagem típica: "No enum constant com.package.EnumName.value"
+        String message = ex.getMessage();
+        if (message != null) {
+            Pattern p = Pattern.compile("No enum constant (.+)\\.(.+)");
+            Matcher m = p.matcher(message);
+            if (m.find()) {
+                String enumClassName = m.group(1);
+                String invalidValue = m.group(2);
+                try {
+                    Class<?> enumClazz = Class.forName(enumClassName);
+                    if (enumClazz.isEnum()) {
+                        Object[] constants = enumClazz.getEnumConstants();
+                        String allowed = Arrays.stream(constants)
+                                .map(Object::toString)
+                                .collect(Collectors.joining(", "));
+                        String enumSimpleName = enumClazz.getSimpleName();
+                        detail = String.format("O valor '%s' não é válido para %s. Valores válidos: %s", invalidValue, enumSimpleName, allowed);
+                    }
+                } catch (ClassNotFoundException ignore) {
+                    // fallback usa mensagem padrão
+                }
+            }
+        }
+
+        return new ProblemDetails(title, HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), detail, request.getRequestURI());
     }
 
     private static ProblemDetails handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex, HttpServletRequest request) {

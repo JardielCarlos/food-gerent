@@ -7,7 +7,7 @@ import java.util.UUID;
 public interface CategoriaRepository {
   List<CategoriaIngrediente> findAll();
 
-  Optional<CategoriaIngrediente>  findById(UUID id);
+  Optional<CategoriaIngrediente> findById(UUID id);
 
   CategoriaIngrediente save(CategoriaIngrediente categoria);
 

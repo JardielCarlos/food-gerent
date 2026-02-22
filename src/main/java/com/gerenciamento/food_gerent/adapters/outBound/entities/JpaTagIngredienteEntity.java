@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tags_ingredientes",
   indexes = {@Index(name = "idx_tag_nome", columnList = "nome")}
 )
-public class JpaTagEntity {
+public class JpaTagIngredienteEntity {
   
   @Id
   @GeneratedValue

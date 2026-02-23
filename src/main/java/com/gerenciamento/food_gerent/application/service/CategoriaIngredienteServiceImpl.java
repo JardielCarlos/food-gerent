@@ -159,7 +159,8 @@ public class CategoriaIngredienteServiceImpl implements CategoriaIngredienteUseC
 
   @Override
   public void deleteCategoria(UUID id) {
-    this.categoriaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrado com o ID: " + id));
+    this.categoriaRepository.findById(id).orElseThrow(() -> 
+      new EntityNotFoundException("Categoria não encontrado com o ID: " + id));
     this.categoriaRepository.deleteById(id);
   }
   

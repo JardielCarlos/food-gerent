@@ -47,7 +47,7 @@ public class CategoriaResponseDTOBuilder {
         id,
         nome,
         parentId,
-        subDtos,      // <-- usar a lista de SubCategoriaResponseDTO aqui
+        subDtos,     
         nivel,
         status,
         dataCriacao,

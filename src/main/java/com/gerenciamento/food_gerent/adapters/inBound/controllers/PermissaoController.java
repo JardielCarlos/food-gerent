@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.PermissaoServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.PermissaoUseCases;
 import com.gerenciamento.food_gerent.domain.permissoes.PermissaoRequestDTO;
 import com.gerenciamento.food_gerent.domain.permissoes.PermissaoResponseDTO;
 
@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PermissaoController {
   
-  private final PermissaoServiceImpl service;
+  private final PermissaoUseCases service;
   
   @GetMapping
   public ResponseEntity<Set<PermissaoResponseDTO>> getAllPermissoes() {

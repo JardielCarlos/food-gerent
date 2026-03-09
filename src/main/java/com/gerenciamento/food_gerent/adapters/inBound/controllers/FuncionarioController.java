@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.FuncionarioServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.FuncionarioUseCases;
 import com.gerenciamento.food_gerent.domain.funcionarios.FuncionarioPatchDTO;
 import com.gerenciamento.food_gerent.domain.funcionarios.FuncionarioRequestDTO;
 import com.gerenciamento.food_gerent.domain.funcionarios.FuncionarioResponseDTO;
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
   
-  private final FuncionarioServiceImpl funcionarioService;
+  private final FuncionarioUseCases funcionarioService;
 
   @GetMapping
   public ResponseEntity<List<FuncionarioResponseDTO>> getAllFuncionarios(){
@@ -35,7 +35,7 @@ public class FuncionarioController {
   }
 
   @GetMapping("/{id}")
-public ResponseEntity<FuncionarioResponseDTO> getFuncionarioById(@PathVariable UUID id){
+  public ResponseEntity<FuncionarioResponseDTO> getFuncionarioById(@PathVariable UUID id){
     FuncionarioResponseDTO funcionario = this.funcionarioService.getFuncionarioById(id);
     return ResponseEntity.ok(funcionario);
   }

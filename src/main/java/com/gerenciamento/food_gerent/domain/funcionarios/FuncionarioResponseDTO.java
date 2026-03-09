@@ -17,8 +17,10 @@ public record FuncionarioResponseDTO(
   UsuarioEnumCargos cargo, 
   BigDecimal salario,
   EnumStatus status, 
-  @JsonFormat(pattern = "dd/MM/yyyy") LocalDate dataCriacao, 
-  @JsonFormat(pattern = "dd/MM/yyyy") LocalDate dataAtualizacao, 
+  @JsonFormat(pattern = "dd/MM/yyyy") 
+  LocalDate dataCriacao, 
+  @JsonFormat(pattern = "dd/MM/yyyy") 
+  LocalDate dataAtualizacao, 
   String telefone,
   LojaDetailsResponseDTO loja
 ) {

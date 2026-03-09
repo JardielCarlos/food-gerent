@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciamento.food_gerent.application.service.AuthServiceImpl;
+import com.gerenciamento.food_gerent.application.usecases.LoginUseCase;
 import com.gerenciamento.food_gerent.domain.auth.LoginRequestDTO;
 import com.gerenciamento.food_gerent.domain.auth.LoginResponseDTO;
 import com.gerenciamento.food_gerent.domain.refreshTokens.RefreshTokenRequestDTO;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-  private final AuthServiceImpl authService;
+  private final LoginUseCase authService;
 
   @PostMapping("/login")
   public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequest){

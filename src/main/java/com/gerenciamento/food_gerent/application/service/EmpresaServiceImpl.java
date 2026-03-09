@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.gerenciamento.food_gerent.application.usecases.EmpresaUseCases;
 import com.gerenciamento.food_gerent.domain.empresas.Empresa;
-import com.gerenciamento.food_gerent.domain.empresas.EmpresaPatchDTO;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaRepository;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaRequestDTO;
 import com.gerenciamento.food_gerent.domain.empresas.EmpresaResponseDTO;

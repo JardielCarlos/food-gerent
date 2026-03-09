@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.gerenciamento.food_gerent.domain.usuarios.UsuarioEnumCargos;
 import com.gerenciamento.food_gerent.utils.enumerated.EnumStatus;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;

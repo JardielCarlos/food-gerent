@@ -2,6 +2,7 @@ package com.gerenciamento.food_gerent.adapters.outBound.repositories.lojas;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
@@ -50,6 +51,13 @@ public class LojaRepositoryImpl implements LojaRepository {
   @Override
   public void deleteById(UUID idLoja) {
     jpaLojaRepository.deleteById(idLoja);
+  }
+
+  @Override
+  public List<Loja> findAllById(Set<UUID> ids) {
+      return jpaLojaRepository.findAllById(ids).stream()
+        .map(mapper::jpaToDomain)
+        .toList();
   }
   
 }

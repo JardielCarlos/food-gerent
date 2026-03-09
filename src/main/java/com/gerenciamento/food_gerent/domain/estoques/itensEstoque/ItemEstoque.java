@@ -133,11 +133,25 @@ public class ItemEstoque {
   }
 
   public void decrementar(BigDecimal valor) {
-    if (valor.compareTo(quantidade) > 0) throw new IllegalArgumentException("Estoque insuficiente");
+    BigDecimal disponivel = getDisponivel();
+    if (valor.compareTo(disponivel) > 0) {
+      throw new IllegalStateException("Estoque insuficiente. Disponível: " + disponivel);
+    }
     this.quantidade = this.quantidade.subtract(valor);
+  }
+
+  public BigDecimal getDisponivel() {
+    BigDecimal reserv = this.reservado != null ? this.reservado : BigDecimal.ZERO;
+    return this.quantidade.subtract(reserv);
   }
 
   public boolean isVencido(LocalDate hoje) { 
     return dataValidade != null && !dataValidade.isAfter(hoje); 
+  }
+
+  public boolean isProximoDeVencer(LocalDate hoje, int diasLimite) {
+    if (dataValidade == null) return false;
+    LocalDate limite = hoje.plusDays(diasLimite);
+    return !isVencido(hoje) && !dataValidade.isAfter(limite);
   }
 }

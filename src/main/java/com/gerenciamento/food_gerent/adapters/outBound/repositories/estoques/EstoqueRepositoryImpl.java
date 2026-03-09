@@ -35,6 +35,11 @@ public class EstoqueRepositoryImpl implements EstoqueRepository {
   @Override
   public Estoque save(Estoque estoque) {
     JpaEstoqueEntity estoqueEntity = estoqueMapper.domainToJpa(estoque);
+
+    if (estoqueEntity.getItens() != null) {
+      estoqueEntity.getItens().forEach(item -> item.setEstoque(estoqueEntity));
+    }
+
     JpaEstoqueEntity savedEntity = this.jpaEstoqueRespository.save(estoqueEntity);
     return estoqueMapper.jpaToDomain(savedEntity);
   }
